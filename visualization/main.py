@@ -12,7 +12,7 @@ import seaborn as sns
 # LOAD DATA
 # -----------------------------
 
-file_path = "yellow_tripdata_2019-01.csv"
+file_path = "cleaned_taxi_data.csv"
 
 print("Loading dataset...")
 
