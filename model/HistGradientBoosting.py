@@ -162,6 +162,56 @@ cm = confusion_matrix(
 print("\nConfusion Matrix:")
 print(cm)
 
+from sklearn.metrics import (
+    precision_score,
+    recall_score,
+    f1_score
+)
+
+precision = precision_score(
+    y_test,
+    y_pred,
+    average="weighted"
+)
+
+recall = recall_score(
+    y_test,
+    y_pred,
+    average="weighted"
+)
+
+f1 = f1_score(
+    y_test,
+    y_pred,
+    average="weighted"
+)
+
+print("\nPrecision:", precision)
+print("Recall   :", recall)
+print("F1 Score :", f1)
+
+import os
+
+os.makedirs(
+    "results",
+    exist_ok=True
+)
+
+results = pd.DataFrame({
+    "Model": ["HistGradientBoosting"],
+    "Accuracy": [acc],
+    "Precision": [precision],
+    "Recall": [recall],
+    "F1": [f1]
+})
+
+results.to_csv(
+    "results/hist_gradient_metrics.csv",
+    index=False
+)
+
+print("\nMetrics saved!")
+
 # Save CSV
 
 cm_df = pd.DataFrame(cm)

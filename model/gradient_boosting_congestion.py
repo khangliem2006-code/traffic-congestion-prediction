@@ -13,6 +13,9 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import (
     accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
     classification_report,
     confusion_matrix
 )
@@ -125,6 +128,57 @@ print(
         y_pred
     )
 )
+# ============================================================
+# ADDITIONAL METRICS
+# ============================================================
+
+precision = precision_score(
+    y_test,
+    y_pred,
+    average="weighted"
+)
+
+recall = recall_score(
+    y_test,
+    y_pred,
+    average="weighted"
+)
+
+f1 = f1_score(
+    y_test,
+    y_pred,
+    average="weighted"
+)
+
+print("\nPrecision:", round(precision, 4))
+print("Recall   :", round(recall, 4))
+print("F1 Score :", round(f1, 4))
+
+# ============================================================
+# SAVE METRICS
+# ============================================================
+
+import os
+
+os.makedirs(
+    "results",
+    exist_ok=True
+)
+
+results = pd.DataFrame({
+    "Model": ["Gradient Boosting"],
+    "Accuracy": [acc],
+    "Precision": [precision],
+    "Recall": [recall],
+    "F1": [f1]
+})
+
+results.to_csv(
+    "results/gradient_boosting_metrics.csv",
+    index=False
+)
+
+print("\nMetrics saved!")
 
 # ============================================================
 # CONFUSION MATRIX

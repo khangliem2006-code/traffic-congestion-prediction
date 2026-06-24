@@ -282,6 +282,46 @@ print(
     )
 )
 
+from sklearn.metrics import (
+    precision_score,
+    recall_score,
+    f1_score
+)
+
+precision = precision_score(
+    y_test,
+    y_pred,
+    average="weighted"
+)
+
+recall = recall_score(
+    y_test,
+    y_pred,
+    average="weighted"
+)
+
+f1 = f1_score(
+    y_test,
+    y_pred,
+    average="weighted"
+)
+
+import os
+os.makedirs("results", exist_ok=True)
+
+results = pd.DataFrame({
+    "Model": ["Random Forest"],
+    "Accuracy": [accuracy],
+    "Precision": [precision],
+    "Recall": [recall],
+    "F1": [f1]
+})
+
+results.to_csv(
+    "results/random_forest_metrics.csv",
+    index=False
+)
+
 # ============================================================
 # 11. CONFUSION MATRIX
 # ============================================================
@@ -370,3 +410,4 @@ print("\nCleaned dataset saved:")
 print("cleaned_taxi_data.csv")
 
 print("\nDONE!")
+
