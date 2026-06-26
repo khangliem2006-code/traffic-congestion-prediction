@@ -1,8 +1,25 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
+
 import joblib
 import pandas as pd
 
-app = FastAPI()
+app = FastAPI(
+    title="Traffic Congestion Prediction API",
+    description="""
+This REST API predicts urban traffic congestion levels using
+the XGBoost machine learning model trained on the
+NYC Yellow Taxi Trip Dataset.
+
+The API accepts taxi trip information as input
+and returns the predicted congestion level.
+""",
+    version="1.0",
+    contact={
+        "name": "Traffic Congestion Prediction Project"
+    }
+)
+
 
 model = joblib.load(
     "results/xgboost_model.pkl"
